@@ -1,31 +1,29 @@
-var meuFormulario = document.getElementById("formulario");
-meuFormulario.addEventListener("submit", function(event) {
-  event.preventDefault();
+let vetor = [];
 
-  //Chama a função somar
-  somar();
+function adicionarValor() {
+  const valor = Number(document.getElementById('valor').value);
+  vetor.push(valor);
 
-});
+  const tabela = document.getElementById('tabelaValores').getElementsByTagName('tbody')[0];
+  const novaLinha = tabela.insertRow();
+  const celula = novaLinha.insertCell(0);
+  celula.textContent = valor;
 
+  document.getElementById('valor').value = '';
+}
 
-//Função somar
-function somar() {
+function mostrarPares() {
+  const tabela = document.getElementById("tabelaPares").getElementsByTagName("tbody")[0];
   
-  //Captura o que está dentro do primeiro input no formulário
-  //Number - Transforma o texto capturado em Numero
-  let primeiro_numero_inteiro = Number(document.getElementById("primeiro_numero_inteiro").value);
-  
-  //Captura o que está dentro do segundo input no formulário
-  //Number - Transforma o texto capturado em Numero
-  let segundo_numero_inteiro = Number(document.getElementById("segundo_numero_inteiro").value); 
-  
-  //Realiza a soma do valor que está na variável "primeiro_numero_inteiro" com o valor que está na
-  //variável "segundo_numero_inteiro"
-  //E a variável "resultado_soma" recebe o valor da soma
-  let resultado_soma = primeiro_numero_inteiro + segundo_numero_inteiro;
+  // Limpa a tabela antes de adicionar novos valores
+  tabela.innerHTML = '';
 
-  //Aqui vai escrever no input "resultado_soma" o valor que está armazenado na variável "resultado_soma"
-  document.getElementById("resultado_soma").value = resultado_soma;
-  
-  
+  for (let i = 0; i < vetor.length; i++) {
+    const valor = vetor[i];
+    if (valor % 2 === 0) {
+      const linha = tabela.insertRow();
+      const celula = linha.insertCell();
+      celula.textContent = valor;
+    }
+  }
 }
